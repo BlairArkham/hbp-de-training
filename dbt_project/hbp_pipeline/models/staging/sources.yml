@@ -1,0 +1,36 @@
+version: 2
+
+sources:
+  - name: raw
+    database: HBP_RAW
+    schema: INGEST
+    description: "Raw ingestion layer from COPY INTO / Python pipelines"
+
+    tables:
+      - name: CUSTOMERS
+        description: "Customer master data"
+        columns:
+          - name: customer_id
+            tests:
+              - unique
+              - not_null
+
+      - name: ORDERS
+        description: "Order transactions"
+        columns:
+          - name: order_id
+            tests:
+              - unique
+              - not_null
+          - name: status
+            tests:
+              - accepted_values:
+                  values: ['completed', 'pending', 'cancelled', 'refunded']
+
+      - name: PRODUCTS
+        description: "Product catalog"
+        columns:
+          - name: product_id
+            tests:
+              - unique
+              - not_null
