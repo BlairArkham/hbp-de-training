@@ -34,3 +34,29 @@ sources:
             tests:
               - unique
               - not_null
+
+  - name: fivetran_supplier
+    database: HBP_RAW
+    schema: GOOGLE_SHEETS
+    description: "Supplier contact data ingested via Fivetran from Google Sheets"
+
+    tables:
+      - name: SUPPLIER_CONTACTS
+        description: "Supplier contact information maintained in Google Sheets"
+
+        loaded_at_field: _FIVETRAN_SYNCED
+
+        freshness:
+          warn_after:
+            count: 24
+            period: hour
+          error_after:
+            count: 48
+            period: hour
+
+        columns:
+          - name: supplier_id
+            description: "Unique supplier identifier"
+            tests:
+              - unique
+              - not_null
