@@ -1,0 +1,13 @@
+ticket_id,customer_id,subject,category,priority,status,created_at,resolved_at,agent_name
+T001,1,Order not arrived,Delivery,high,resolved,10/06/2024,12/06/2024,Sarah O
+T002,3,Wrong item sent,Product,medium,resolved,11/06/2024,13/06/2024,James M
+T003,2,Refund not processed,Billing,high,open,14/06/2024,,Sarah O
+T004,5,Keyboard stopped working,Product,low,resolved,15/06/2024,16/06/2024,Priya N
+T005,4,Account login issue,Account,medium,resolved,18/06/2024,18/06/2024,James M
+T006,6,Delivery delay query,Delivery,low,open,20/06/2024,,Priya N
+T007,1,Duplicate charge,Billing,high,resolved,21/06/2024,22/06/2024,Sarah O
+T008,8,Product out of stock,Product,low,closed,23/06/2024,24/06/2024,James M
+T009,2,Missing invoice,Billing,medium,resolved,25/06/2024,26/06/2024,Sarah O
+T010,7,Wrong address on order,Delivery,medium,open,28/06/2024,,Priya N
+T011,5,Item damaged in transit,Product,high,resolved,01/07/2024,02/07/2024,James M
+T012,3,Password reset not working,Account,low,resolved,03/07/2024,03/07/2024,Priya N

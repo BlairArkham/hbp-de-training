@@ -1,12 +1,17 @@
 version: 2
 
 sources:
+
+  # =========================
+  # RAW INGESTION LAYER
+  # =========================
   - name: raw
     database: HBP_RAW
     schema: INGEST
     description: "Raw ingestion layer from COPY INTO / Python pipelines"
 
     tables:
+
       - name: CUSTOMERS
         description: "Customer master data"
         columns:
@@ -25,7 +30,8 @@ sources:
           - name: status
             tests:
               - accepted_values:
-                  values: ['completed', 'pending', 'cancelled', 'refunded']
+                  arguments:
+                    values: ['completed', 'pending', 'cancelled', 'refunded']
 
       - name: PRODUCTS
         description: "Product catalog"
@@ -35,28 +41,43 @@ sources:
               - unique
               - not_null
 
+      - name: SUPPORT_TICKETS
+        description: "Customer support ticket data"
+        columns:
+          - name: ticket_id
+            tests:
+              - unique
+              - not_null
+          - name: customer_id
+          - name: status
+            tests:
+              - accepted_values:
+                  arguments:
+                    values: ['open', 'resolved', 'closed']
+
+  # =========================
+  # FIVETRAN LAYER
+  # =========================
   - name: fivetran_supplier
     database: HBP_RAW
     schema: GOOGLE_SHEETS
     description: "Supplier contact data ingested via Fivetran from Google Sheets"
 
+    loaded_at_field: _fivetran_synced
+
+    freshness:
+      warn_after:
+        count: 24
+        period: hour
+      error_after:
+        count: 48
+        period: hour
+
     tables:
       - name: SUPPLIER_CONTACTS
         description: "Supplier contact information maintained in Google Sheets"
-
-        loaded_at_field: _FIVETRAN_SYNCED
-
-        freshness:
-          warn_after:
-            count: 24
-            period: hour
-          error_after:
-            count: 48
-            period: hour
-
         columns:
           - name: supplier_id
-            description: "Unique supplier identifier"
             tests:
               - unique
               - not_null
