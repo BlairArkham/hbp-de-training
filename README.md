@@ -24,30 +24,97 @@ The project culminates in an end-to-end capstone pipeline implementing the compl
 # Project Structure
 
 ```text
+# Project Structure
+
+```text
 hbp-de-training/
 │
 ├── data/
 │   ├── raw/
+│   │   ├── customers.csv
+│   │   ├── orders.csv
+│   │   └── products.csv
+│   │
 │   └── processed/
+│       ├── customers_clean.csv
+│       ├── orders_clean.csv
+│       └── products_clean.csv
 │
 ├── ingestion/
 │   ├── ingest_customers.py
 │   ├── ingest_orders.py
 │   ├── ingest_products.py
-│   └── run_pipeline.py
+│   ├── run_pipeline.py
+│   └── .env
 │
 ├── sql/
+│   ├── q1_full_table_preview.sql
+│   ├── q2_inner_join_customers_orders.sql
+│   ├── q3_left_join_recent_orders.sql
+│   ├── q4_left_join_coalesce.sql
+│   ├── q5_group_by_country_metrics.sql
+│   ├── q6_having_product_quantity.sql
+│   ├── q7_high_spend_customers_cte.sql
+│   ├── q8_customer_metrics_cte.sql
+│   ├── q9_product_revenue_rank.sql
+│   ├── q10_subquery_vs_cte_comparison.sql
+│   ├── q11_row_number.sql
+│   ├── q12_rank_vs_dense_rank.sql
+│   ├── q13_running_total.sql
+│   ├── q14_lag_previous_order.sql
+│   ├── q15_lead_next_order.sql
+│   ├── q16_customer_order_history.sql
+│   ├── q17_product_metrics.sql
+│   └── snippets/
+│       └── window_functions_reference.sql
 │
-├── models/
-│   ├── staging/
-│   ├── intermediate/
-│   └── marts/
-│
-├── snapshots/
-├── tests/
 ├── diagrams/
+│   ├── hbp_data_lifecycle_v1.png
+│   ├── hbp_pipeline_architecture.png
+│   └── hbp_data_lifecycle_v3.png
+│
+├── dbt/
+│   ├── dbt_project.yml
+│   ├── profiles.yml
+│   ├── packages.yml
+│   │
+│   ├── models/
+│   │   ├── staging/
+│   │   │   ├── schema.yml
+│   │   │   ├── stg_customers.sql
+│   │   │   ├── stg_orders.sql
+│   │   │   ├── stg_products.sql
+│   │   │   └── stg_support_tickets.sql
+│   │   │
+│   │   ├── intermediate/
+│   │   │   ├── schema.yml
+│   │   │   ├── int_customer_order_history.sql
+│   │   │   └── int_product_metrics.sql
+│   │   │
+│   │   └── marts/
+│   │       ├── schema.yml
+│   │       ├── mart_customer_summary.sql
+│   │       └── mart_support_summary.sql
+│   │
+│   ├── target/
+│   └── logs/
+│
 ├── docs/
-└── README.md
+│   ├── lineage_dag.png
+│   ├── dbt_docs/
+│   └── screenshots/
+│       ├── dbt_debug.png
+│       ├── dbt_run.png
+│       ├── dbt_test.png
+│       ├── query_history.png
+│       └── merged_pr.png
+│
+├── .gitignore
+├── requirements.txt
+├── README.md
+└── LICENSE
+```
+
 ```
 
 ---
